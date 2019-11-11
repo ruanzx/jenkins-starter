@@ -1,30 +1,52 @@
 pipeline {
-  agent {
-    docker {
-      image 'node:6-alpine'
-      args '-p 3000:3000'
-    }
-  }
+  agent none
+
   environment {
     CI = 'true'
+    DB_SECRET = credentials('DB_SECRET');
   }
+
+  tools {
+    git 'localGit'
+    jdk 'localJava'
+  }
+
   stages {
     stage('Build') {
+      agent {
+        docker {
+          image 'node:12.13.0-alpine'
+          args '-p 3000:3000'
+        }
+      }
       steps {
-        sh 'npm install'
+        sh '''#!/bin/bash
+					echo "JAVA_HOME = ${JAVA_HOME}";
+					echo "PATH = ${PATH}";
+          echo env;
+					echo "this is the project id environment";
+				'''
+        sh 'echo "npm install"';
+        println "Init success..";
       }
     }
+
     stage('Test') {
       steps {
-        sh './jenkins/scripts/test.sh'
+
       }
     }
+
     stage('Deliver') {
       steps {
-        sh './jenkins/scripts/deliver.sh'
-        input message: 'Finished using the web site? (Click "Proceed" to continue)'
-        sh './jenkins/scripts/kill.sh'
+
       }
+    }
+  }
+
+  post {
+    always {
+
     }
   }
 }
