@@ -6,11 +6,6 @@ pipeline {
     DB_SECRET = credentials('DB_SECRET');
   }
 
-  tools {
-    git 'localGit'
-    jdk 'localJava'
-  }
-
   stages {
     stage('Build') {
       agent {
@@ -33,20 +28,20 @@ pipeline {
 
     stage('Test') {
       steps {
-
+        sh 'echo "test"';
       }
     }
 
     stage('Deliver') {
       steps {
-
+        sh 'echo "deliver"';
       }
     }
   }
 
   post {
     always {
-
+      sh 'echo "post always"';
     }
   }
 }
