@@ -12,7 +12,7 @@ pipeline {
         docker {
           image 'node:12.13.0-alpine'
           args '-p 3000:3000'
-          label 'docker' // Require a build executor with docker
+          label 'agent-1' // Require a build executor with docker
         }
       }
       steps {
