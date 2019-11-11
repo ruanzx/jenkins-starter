@@ -12,6 +12,7 @@ pipeline {
         docker {
           image 'node:12.13.0-alpine'
           args '-p 3000:3000'
+          label 'docker' // Require a build executor with docker
         }
       }
       steps {
@@ -27,8 +28,22 @@ pipeline {
     }
 
     stage('Test') {
-      steps {
-        sh 'echo "test"';
+      // steps {
+      //   sh 'echo "test"';
+      // }
+
+      parallel {
+        stage('Unit Test') {
+          steps {
+            sh 'echo "Execute Unit test"'
+          }
+        }
+        stage('Integration Test') {
+          // when { expression { return isTimeTriggeredBuild() } }
+          steps {
+              sh 'echo "Execute Integration Test"'
+          }
+        }
       }
     }
 
