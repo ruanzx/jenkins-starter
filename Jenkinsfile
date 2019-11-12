@@ -22,6 +22,7 @@ pipeline {
         //   echo env;
 				// 	echo "this is the project id environment";
 				// '''
+        sh 'uname -a';
         println "Init success..";
       }
     }
