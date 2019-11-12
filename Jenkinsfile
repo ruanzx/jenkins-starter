@@ -49,6 +49,7 @@ pipeline {
 
     stage('Deliver') {
       steps {
+        sh 'uname -a';
         println "deliver";
       }
     }
