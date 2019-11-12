@@ -16,12 +16,12 @@ pipeline {
         }
       }
       steps {
-        sh '''#!/bin/bash
-					echo "JAVA_HOME = ${JAVA_HOME}";
-					echo "PATH = ${PATH}";
-          echo env;
-					echo "this is the project id environment";
-				'''
+        // sh '''#!/bin/bash
+				// 	echo "JAVA_HOME = ${JAVA_HOME}";
+				// 	echo "PATH = ${PATH}";
+        //   echo env;
+				// 	echo "this is the project id environment";
+				// '''
         sh 'echo "npm install"';
         println "Init success..";
       }
