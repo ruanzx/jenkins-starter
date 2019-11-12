@@ -22,7 +22,6 @@ pipeline {
         //   echo env;
 				// 	echo "this is the project id environment";
 				// '''
-        sh 'echo "npm install"';
         println "Init success..";
       }
     }
@@ -35,13 +34,13 @@ pipeline {
       parallel {
         stage('Unit Test') {
           steps {
-            sh 'echo "Execute Unit test"'
+            println "Execute Unit test";
           }
         }
         stage('Integration Test') {
           // when { expression { return isTimeTriggeredBuild() } }
           steps {
-              sh 'echo "Execute Integration Test"'
+            println "Execute Integration Test";
           }
         }
       }
@@ -49,14 +48,14 @@ pipeline {
 
     stage('Deliver') {
       steps {
-        sh 'echo "deliver"';
+        println "deliver";
       }
     }
   }
 
   post {
     always {
-      sh 'echo "post always"';
+      println "post always";
     }
   }
 }
